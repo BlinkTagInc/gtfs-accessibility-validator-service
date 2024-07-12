@@ -54,7 +54,7 @@ export default function Home() {
             </div>
           </div>
 
-          <h2>Accessiblity Guidelines</h2>
+          <h2>Accessibility Guidelines</h2>
 
           <div className="flex flex-col gap-8">
             <div className="card max-w-[650px]" id="issue-0">
