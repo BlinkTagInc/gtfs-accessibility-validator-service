@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import gtfsAccessibilityValidator from 'gtfs-accessibility-validator';
 
-export const maxDuration = 60 * 5; // 5 minutes
+export const maxDuration = 300; // 5 minutes
 
 export const POST = async (request: Request) => {
   const body = await request.json();
