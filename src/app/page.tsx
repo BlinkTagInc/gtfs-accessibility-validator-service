@@ -1,113 +1,208 @@
-import Image from "next/image";
+import Image from 'next/image';
+
+import UploadForm from '../components/UploadForm';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main className="flex min-h-screen flex-col items-center justify-between px-3 py-4 md:p-20">
+        <div className="">
+          <Image
+            className="relative"
+            src="/gtfs-accessibility-validator-logo.svg"
+            alt="GTFS Accessibility Validator Logo"
+            width={180}
+            height={180}
+            priority
+          />
         </div>
+        <div className="card my-6 max-w-[650px]">
+          <UploadForm />
+        </div>
+        <div>
+          <div className="card max-w-[650px] mx-auto my-6">
+            <p>This tool checks for:</p>
+            <ul className="mb-3">
+              <li>
+                <code>wheelchair_accessible</code> field in{' '}
+                <code>trips.txt</code>
+              </li>
+              <li>
+                <code>wheelchair_boarding</code> field in <code>stops.txt</code>
+              </li>
+              <li>
+                <code>tts_stop_name</code> field in <code>stops.txt</code>
+              </li>
+              <li>
+                <code>levels.txt</code> file
+              </li>
+              <li>
+                <code>pathways.txt</code> file
+              </li>
+              <li>
+                Contrast ratio between <code>route_color</code> and{' '}
+                <code>route_text_color</code> in <code>routes.txt</code>
+              </li>
+            </ul>
+
+            <div>
+              These accessibility guidelines are taken from the{' '}
+              <a href="https://dot.ca.gov/cal-itp/california-transit-data-guidelines-v3_0#section-checklist">
+                California Transit Data Guidelines
+              </a>{' '}
+              published by Caltrans.
+            </div>
+          </div>
+
+          <h2>Accessiblity Guidelines</h2>
+
+          <div className="flex flex-col gap-8">
+            <div className="card max-w-[650px]" id="issue-0">
+              <h3>
+                <code>wheelchair_accessible</code> field in{' '}
+                <code>trips.txt</code>
+              </h3>
+              <p>
+                <strong>Guideline:</strong> The <code>wheelchair_boarding</code>{' '}
+                field has a valid, non-empty, and non-null value for every entry
+                in the <code>stops.txt</code> file.
+              </p>
+
+              <p>
+                Transit riders with wheelchairs and other mobility aids
+                encounter distinct challenges in accessing transit, including
+                uncertainty as to whether they can board and alight at
+                particular locations using their devices.
+              </p>
+
+              <p>
+                Transit providers should support the ability of these riders to
+                plan and take trips on transit by publishing information about
+                the locations where wheelchair users can and cannot access the
+                system in trip-planning applications.
+              </p>
+            </div>
+            <div className="card max-w-[650px]" id="issue-1">
+              <h3>
+                <code>wheelchair_boarding</code> field in <code>stops.txt</code>
+              </h3>
+              <p>
+                <strong>Guideline:</strong> The{' '}
+                <code>wheelchair_accessible</code> field has a valid, non-empty,
+                and non-null value for every entry in the <code>trips.txt</code>{' '}
+                file.
+              </p>
+
+              <p>
+                Transit riders with wheelchairs and other mobility aids
+                encounter distinct challenges in accessing transit, including
+                the uncertainty as to whether their devices can be used on
+                specific scheduled trips.
+              </p>
+
+              <p>
+                Transit providers should support the ability of these riders to
+                plan and take trips on transit by publishing information about
+                the trips on which wheelchair users may or may not be able to
+                travel in trip-planning applications.
+              </p>
+            </div>
+            <div className="card max-w-[650px]" id="issue-2">
+              <h3>
+                <code>tts_stop_name</code> field in <code>stops.txt</code>
+              </h3>
+              <p>
+                <strong>Guideline:</strong> The <code>tts_stop_name</code> field
+                should include correct pronunciation for all stop names in{' '}
+                <code>stops.txt</code> that are commonly mispronounced in
+                trip-planning applications.
+              </p>
+
+              <p>
+                Audio annunciation of stop names is an important wayfinding tool
+                for transit riders with visual impairments.
+              </p>
+
+              <p>
+                Transit providers should support the ability of these riders to
+                conveniently and accurately plan and take trips on transit by
+                ensuring that stop names will be pronounced correctly in
+                trip-planning applications.
+              </p>
+
+              <p>
+                BlinkTag created a different open source tool to review GTFS
+                stop name pronunciations and determine which stops need a{' '}
+                <code>tts_stop_name value</code>. See{' '}
+                <a href="https://github.com/BlinkTagInc/gtfs-tts">
+                  GTFS Text-to-Speech Tester
+                </a>
+                .
+              </p>
+            </div>
+            <div className="card max-w-[650px]" id="issue-3">
+              <h3 id="issue-4">
+                <code>levels.txt</code> and <code>pathways.txt</code> files
+              </h3>
+              <p>
+                <strong>Guideline:</strong> Sufficient data is included within{' '}
+                <code>stops.txt</code>, <code>pathways.txt</code>, and{' '}
+                <code>levels.txt</code> to navigate to, from, and between any
+                boarding zone to street level with varying physical abilities,
+                including <code>pathway_mode</code> and <code>stair_count</code>{' '}
+                where applicable. This includes but is not limited to any stops
+                that use <code>parent_station</code> in <code>stops.txt</code>{' '}
+                as well as all significant or named transit facilities where an
+                infrequent visitor may be concerned about accessibility.
+              </p>
+
+              <p>
+                Transit riders with wheelchairs and other mobility aids
+                encounter distinct challenges in accessing transit, including
+                uncertainty about navigating between boarding zones and street
+                level at stops.
+              </p>
+
+              <p>
+                Transit providers should support the ability of these riders to
+                plan and take trips on transit by providing sufficient
+                information for them to find accessible paths on and off transit
+                using mobile applications.
+              </p>
+            </div>
+            <div className="card max-w-[650px]" id="issue-5">
+              <h3>
+                Contrast ratio between <code>route_color</code> and{' '}
+                <code>route_text_color</code> in <code>routes.txt</code>
+              </h3>
+              <p>
+                <strong>Guideline:</strong> WCAG AA Large Text Contrast
+              </p>
+
+              <p>
+                Routes are often identified using the <code>route_color</code>{' '}
+                field in <code>routes.txt</code>. Often, the{' '}
+                <code>route_short_name</code> is used as text on top of the{' '}
+                <code>route_color</code> using the <code>route_text_color</code>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div className="footer">
+        Created by <a href="https://blinktag.com">BlinkTag Inc</a>
+        <br />
+        Powered by{' '}
+        <a href="https://github.com/BlinkTagInc/gtfs-accessibility-validator">
+          GTFS Accessibility Validator
+        </a>
+        <br />
+        <a href="https://gtfstohtml.com/docs/related-libraries">
+          Other GTFS Tools
+        </a>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }
