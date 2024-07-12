@@ -88,10 +88,10 @@ tr:last-of-type td {
   @apply mt-12 bg-[#3230AD] px-24 py-12 text-white text-center;
 
   a {
-    @apply text-white;
+    @apply text-white underline;
   }
 
   a:hover {
-    @apply underline;
+    @apply text-gray-100;
   }
 }

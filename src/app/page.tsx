@@ -202,6 +202,11 @@ export default function Home() {
         <a href="https://gtfstohtml.com/docs/related-libraries">
           Other GTFS Tools
         </a>
+        <br />
+        Contribute on{' '}
+        <a href="https://github.com/BlinkTagInc/gtfs-accessibility-validator-service">
+          Github
+        </a>
       </div>
     </>
   );
