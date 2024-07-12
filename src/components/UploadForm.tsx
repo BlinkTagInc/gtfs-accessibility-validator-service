@@ -6,11 +6,19 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Loading } from './Loading';
 
-interface ValidationResult {
+interface ValidationStat {
   name: string;
   status: string;
   value: string;
   routes?: Record<string, string>[];
+}
+
+interface ValidationResults {
+  stats: ValidationStat[];
+  agency: string;
+  feed_version: string;
+  feed_start_date: number;
+  feed_end_date: number;
 }
 
 const Status = ({ status }: { status: string }) => {
@@ -27,8 +35,9 @@ const Status = ({ status }: { status: string }) => {
 
 const UploadForm = () => {
   const [url, setUrl] = useState('');
-  const [validationResults, setValidationResults] =
-    useState<ValidationResult[]>();
+  const [validationResults, setValidationResults] = useState<
+    ValidationResults | undefined
+  >();
   const [loading, setLoading] = useState(false);
 
   return (
@@ -37,8 +46,20 @@ const UploadForm = () => {
         <>
           <div>
             <h3 className="mb-0">Validation Results</h3>
-            <div className="text-sm mb-2">GTFS from {url}</div>
-            <table>
+            <div className="text-sm">GTFS URL: {url}</div>
+            <div className="text-sm">Agency: {validationResults.agency}</div>
+            {validationResults.feed_version && (
+              <div className="text-sm">
+                Feed Version: {validationResults.feed_version}
+                {validationResults.feed_start_date && (
+                  <span> ({validationResults.feed_start_date} - </span>
+                )}
+                {validationResults.feed_end_date && (
+                  <span>{validationResults.feed_end_date})</span>
+                )}
+              </div>
+            )}
+            <table className="mt-2">
               <thead>
                 <tr>
                   <th>Status</th>
@@ -47,17 +68,14 @@ const UploadForm = () => {
                 </tr>
               </thead>
               <tbody>
-                {validationResults.map((validationResult, index) => {
+                {validationResults.stats.map((stat, index) => {
                   let routeList = null;
 
-                  if (
-                    validationResult.routes &&
-                    validationResult.routes.length > 0
-                  ) {
-                    routeList = validationResult.routes.length > 0 && (
+                  if (stat.routes && stat.routes.length > 0) {
+                    routeList = stat.routes.length > 0 && (
                       <span>
                         <br />
-                        {validationResult.routes
+                        {stat.routes
                           .map(
                             (route) =>
                               route.route_short_name ?? route.route_long_name,
@@ -70,17 +88,17 @@ const UploadForm = () => {
                   return (
                     <tr key={index}>
                       <td>
-                        <Status status={validationResult.status} />
+                        <Status status={stat.status} />
                       </td>
                       <td className="leading-4">
-                        {validationResult.name}
+                        {stat.name}
                         {routeList}
                         <br />
                         <a href={`#issue-${index}`} className="text-xs">
                           Details
                         </a>
                       </td>
-                      <td>{validationResult.value}</td>
+                      <td>{stat.value}</td>
                     </tr>
                   );
                 })}
