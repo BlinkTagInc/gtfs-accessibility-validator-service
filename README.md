@@ -1,6 +1,6 @@
 # GTFS Accessibility Validator Service
 
-This is a next.js app which provides a web interface to the gtfs-accessibility-validator.
+This is a next.js app which provides a web interface to the [gtfs-accessibility-validator](https://github.com/BlinkTagInc/gtfs-accessibility-validator).
 
 ## Setup
 
