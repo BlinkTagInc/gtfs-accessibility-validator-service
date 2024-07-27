@@ -283,15 +283,15 @@ const UploadForm = () => {
                     </svg>
                     <p className="mb-2 text-sm text-gray-500">
                       {isDragActive ? (
-                        <span>
-                          Drag &aposn&apos drop a zipped GTFS file here
+                        <span className="font-semibold">
+                          Drag &apos;n&apos; drop a zipped GTFS file here
                         </span>
                       ) : (
                         <span>
                           <span className="font-semibold">
                             Click to upload GTFS
                           </span>{' '}
-                          or drag &aposn&apos drop
+                          or drag &apos;n&apos; drop
                         </span>
                       )}
                     </p>
