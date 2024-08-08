@@ -6,16 +6,17 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-between px-3 py-4 md:p-20">
-        <div className="">
+        <h1>
+          <span className="sr-only">GTFS Accessibility Validator</span>
           <Image
             className="relative"
             src="/gtfs-accessibility-validator-logo.svg"
-            alt="GTFS Accessibility Validator Logo"
+            alt=""
             width={180}
             height={180}
             priority
           />
-        </div>
+        </h1>
         <div className="card my-6 max-w-[650px]">
           <UploadForm />
         </div>
