@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { track } from '@vercel/analytics/server';
 import gtfsAccessibilityValidator from 'gtfs-accessibility-validator';
 
 export const maxDuration = 300; // 5 minutes
@@ -20,6 +21,10 @@ export const POST = async (request: Request) => {
   try {
     const validationResults = await gtfsAccessibilityValidator({
       gtfsUrl,
+    });
+
+    await track('GTFS Uploaded', {
+      url: gtfsUrl,
     });
 
     return NextResponse.json({

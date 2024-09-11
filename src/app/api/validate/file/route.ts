@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
-import gtfsAccessibilityValidator from 'gtfs-accessibility-validator';
 import { rm, writeFile } from 'node:fs/promises';
-import path from 'path';
+import path from 'node:path';
+
+import { NextResponse } from 'next/server';
+import { track } from '@vercel/analytics/server';
+import gtfsAccessibilityValidator from 'gtfs-accessibility-validator';
 import { temporaryDirectory } from 'tempy';
 
 export const maxDuration = 300; // 5 minutes
@@ -37,6 +39,8 @@ export const POST = async (request: Request) => {
     });
 
     await rm(tempDir, { recursive: true });
+
+    await track('GTFS Uploaded');
 
     return NextResponse.json({
       success: true,
