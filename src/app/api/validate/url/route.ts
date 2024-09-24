@@ -32,6 +32,7 @@ export const POST = async (request: Request) => {
       results: validationResults,
     });
   } catch (error) {
+    console.log('Error occurred ', error);
     return NextResponse.json(
       {
         error: 'Unable to process GTFS',
