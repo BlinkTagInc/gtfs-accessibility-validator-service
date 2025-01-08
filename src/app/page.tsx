@@ -64,30 +64,6 @@ export default function Home() {
                 <code>trips.txt</code>
               </h3>
               <p>
-                <strong>Guideline:</strong> The <code>wheelchair_boarding</code>{' '}
-                field has a valid, non-empty, and non-null value for every entry
-                in the <code>stops.txt</code> file.
-              </p>
-
-              <p>
-                Transit riders with wheelchairs and other mobility aids
-                encounter distinct challenges in accessing transit, including
-                uncertainty as to whether they can board and alight at
-                particular locations using their devices.
-              </p>
-
-              <p>
-                Transit providers should support the ability of these riders to
-                plan and take trips on transit by publishing information about
-                the locations where wheelchair users can and cannot access the
-                system in trip-planning applications.
-              </p>
-            </div>
-            <div className="card max-w-[650px]" id="issue-1">
-              <h3>
-                <code>wheelchair_boarding</code> field in <code>stops.txt</code>
-              </h3>
-              <p>
                 <strong>Guideline:</strong> The{' '}
                 <code>wheelchair_accessible</code> field has a valid, non-empty,
                 and non-null value for every entry in the <code>trips.txt</code>{' '}
@@ -106,6 +82,31 @@ export default function Home() {
                 plan and take trips on transit by publishing information about
                 the trips on which wheelchair users may or may not be able to
                 travel in trip-planning applications.
+              </p>
+            </div>
+            <div className="card max-w-[650px]" id="issue-1">
+              <h3>
+                <code>wheelchair_boarding</code> field in <code>stops.txt</code>
+              </h3>
+
+              <p>
+                <strong>Guideline:</strong> The <code>wheelchair_boarding</code>{' '}
+                field has a valid, non-empty, and non-null value for every entry
+                in the <code>stops.txt</code> file.
+              </p>
+
+              <p>
+                Transit riders with wheelchairs and other mobility aids
+                encounter distinct challenges in accessing transit, including
+                uncertainty as to whether they can board and alight at
+                particular locations using their devices.
+              </p>
+
+              <p>
+                Transit providers should support the ability of these riders to
+                plan and take trips on transit by publishing information about
+                the locations where wheelchair users can and cannot access the
+                system in trip-planning applications.
               </p>
             </div>
             <div className="card max-w-[650px]" id="issue-2">
