@@ -99,7 +99,7 @@ const UploadForm = () => {
     accept: {
       'application/x-zip': ['.zip'],
     },
-    maxSize: 20 * 1024 * 1024,
+    maxSize: 4.5 * 1024 * 1024,
     maxFiles: 1,
   });
 
@@ -296,7 +296,7 @@ const UploadForm = () => {
                       )}
                     </div>
                     <div className="text-xs text-gray-500">
-                      Zipped GTFS only (MAX. 20MB)
+                      Zipped GTFS only (MAX. 4.5MB)
                     </div>
                   </div>
                 </label>
