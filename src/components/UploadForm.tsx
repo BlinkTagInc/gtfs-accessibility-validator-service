@@ -46,9 +46,17 @@ const UploadForm = () => {
       if (rejectedFiles.length > 0) {
         toast(
           rejectedFiles
-            .flatMap((file) =>
-              file.errors.map((fileError) => fileError.message),
-            )
+            .flatMap((file) => {
+              if (
+                file.errors.some((error) => error.code === 'file-too-large')
+              ) {
+                return [
+                  'File is too large. (Maximum file size is 4.5MB). Try loading via URL instead of file upload, or use the GTFS Accessibliity Validator from the command line.',
+                ];
+              }
+
+              return file.errors.map((fileError) => fileError.message);
+            })
             .join(', '),
           { type: 'error' },
         );
@@ -69,9 +77,13 @@ const UploadForm = () => {
 
         if (response.ok === false) {
           const data = await response.json();
-          toast(data.error ?? 'Error validating GTFS', {
-            type: 'error',
-          });
+          toast(
+            data.error ??
+              'Error processing GTFS. For help, email gtfs@blinktag.com with the GTFS you are trying to use.',
+            {
+              type: 'error',
+            },
+          );
           setLoading(false);
           return;
         }
@@ -79,7 +91,10 @@ const UploadForm = () => {
         const data = await response.json();
 
         if (data.success === false) {
-          toast(data.error, { type: 'error' });
+          toast(
+            'Error processing GTFS. For help, email gtfs@blinktag.com with the GTFS you are trying to use.',
+            { type: 'error' },
+          );
           setLoading(false);
           return;
         }
@@ -215,9 +230,13 @@ const UploadForm = () => {
 
                     if (response.ok === false) {
                       const data = await response.json();
-                      toast(data.error ?? 'Error validating GTFS', {
-                        type: 'error',
-                      });
+                      toast(
+                        data.error ??
+                          'Error processing GTFS. For help, email gtfs@blinktag.com with the GTFS you are trying to use.',
+                        {
+                          type: 'error',
+                        },
+                      );
                       setLoading(false);
                       return;
                     }
@@ -234,7 +253,12 @@ const UploadForm = () => {
                     setLoading(false);
                   } catch (error) {
                     console.error('Error:', error);
-                    toast('Error validating GTFS', { type: 'error' });
+                    toast(
+                      'Error processing GTFS. For help, email gtfs@blinktag.com with the GTFS you are trying to use.',
+                      {
+                        type: 'error',
+                      },
+                    );
                     setLoading(false);
                   }
                 }}
