@@ -3,3 +3,6 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - gtfs-accessibility-validator@0.3.7
+  - gtfs@4.19.1
